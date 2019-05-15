@@ -1,0 +1,47 @@
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity,StyleSheet } from 'react-native'
+
+const styles = StyleSheet.create({
+  viewContainer: {
+    flex: 1,
+    justifyContent:'center',
+    alignItems:'center'
+  }
+})
+
+class Player extends Component {
+    state = {
+      score: 0
+    }
+
+    componentWillMount() {
+      console.log("4")
+      this.increaseScore()
+    }
+    increaseScore() {
+      console.log("2")
+        // interestingly, both lines activated only increments score by 1
+        this.setState(prevState => ({ score: prevState.score + 1 }))
+        this.setState({ score: this.state.score + 1 })
+    }
+
+    render () {
+      return (
+        <View>
+          <TouchableOpacity onPress={() => this.increaseScore()}><Text>Increase</Text></TouchableOpacity>
+          <Text>{this.state.score}</Text>
+        </View>
+      )
+    }
+}
+
+export default class App extends Component {
+    render() {
+      console.log("1")
+        return (
+            <View style={styles.viewContainer}>
+                <Player />
+            </View>
+        )
+    }
+}
